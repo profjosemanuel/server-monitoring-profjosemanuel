@@ -33,6 +33,8 @@ PATH=/usr/sbin:/sbin:/usr/bin:/bin
 
 # Parse script arguments
 # ==========================
+
+menu_inicial () {
 for i in "$@"
 do
 case $i in
@@ -77,9 +79,12 @@ case $i in
     ;;
 esac
 done
+}
 
 # Set default values
 # ==========================
+
+menu_2 () {
 if [ -z ${DEBUG+x} ]; then
     DEBUG="false"
 fi
@@ -87,9 +92,12 @@ fi
 if [ -z ${HOSTNAME+x} ]; then
     HOSTNAME=$( hostname )
 fi
+}
 
 # Detect distribution, for required module install later
 # =======================================================
+
+menu_3 () {
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     if [ "$ID" != "" ]; then OS=$ID; elif [ "$NAME" != "" ]; then OS=$NAME; fi
@@ -115,9 +123,11 @@ else
     OS=$(uname -s)
     VER=$(uname -r)
 fi
+}
 # Distribution name should be lowercase
 DIST=$(echo $OS | tr '[:upper:]' '[:lower:]')
 
+menu_4 () {
 # Install missing modules
 # ==========================
 case "$DIST" in
@@ -172,7 +182,7 @@ case "$DIST" in
         fi
     ;;
 esac
-
+}
 # Helper functions
 # ==========================
 get_server_ip () {
@@ -380,6 +390,7 @@ MIME-Version: 1.0
 EOF
 }
 
+menu_6 () {
 if [ $INFO = "true" ]; then
 	echo "CPU:"
 	get_cpu_usage
@@ -389,7 +400,9 @@ if [ $INFO = "true" ]; then
 	get_disk_usage
 	exit
 fi
+}
 
+menu_7 () {
 if [ $DEBUG = "true" ]; then
 	clear
 	echo "DEBUG    = true"
@@ -398,7 +411,9 @@ if [ $DEBUG = "true" ]; then
 	echo "DISK     = ${DISK}"
 	echo "HOSTNAME = ${HOSTNAME}"
 fi
+}
 
+menu_8 () {
 # Main logic
 # ==========================
 METRICS=('cpu' 'memory' 'disk')
@@ -479,3 +494,4 @@ do
 		done
 	done
 done
+}
