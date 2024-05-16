@@ -4,9 +4,9 @@ PATH=/usr/sbin:/sbin:/usr/bin:/bin
 # Detect distribution, for required module install later
 # =======================================================
 
-sendmail_instalado=FALSE
-bc_instalado=FALSE
-sysstat_instaldo=FALSE
+sendmail_instalado=false
+bc_instalado=false
+sysstat_instaldo=false
 
 
 
